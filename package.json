@@ -1,3 +1,6 @@
 {
-  "name": "hadasbatmordechai.github.io"
+  "name": "hadasbatmordechai.github.io",
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
 }
