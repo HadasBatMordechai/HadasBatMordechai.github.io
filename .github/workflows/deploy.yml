@@ -64,11 +64,38 @@ jobs:
         working-directory: ./vue
         run: npm run test
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Move vue to public
         run: mv vue/dist public/vue
+
+
+      - name: Checkout react
+        uses: actions/checkout@v4
+        with:
+          repository: HadasBatMordechai/portfolio-react
+          token: ${{ secrets.GH_PAT }}
+          path: react
+
+      - name: Install dependencies
+        working-directory: ./react
+        run: npm ci
+
+      - name: Code formatting
+        working-directory: ./react
+        run: npm run format:check
+
+      - name: Linting
+        working-directory: ./react
+        run: npm run analyse
+
+      - name: Build
+        working-directory: ./react
+        run: npm run build
+
+      - name: Move react to public
+        run: mv react/dist public/react
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
